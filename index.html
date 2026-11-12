@@ -29,6 +29,14 @@
     <h1>ISS Live Tracker</h1>
     <!-- Map drawn here -->
     <div id="map"></div>
+    <!--- Telemetry Data here -->
+    <div id="Telemetry">
+        <h2> Telemetry Data </h2>
+        <div>Lat: <span id="lat" style="font-weight: bold;">--</span></div>
+        <div>Lon: <span id="lon" style="font-weight: bold;">--</span></div>
+        <div>Alt: <span id="alt" style="font-weight: bold;">--</span></div>
+        <div>Vel: <span id="vel" style="font-weight: bold;">--</span></div>
+    </div>
     <!-- Leaflet JS file -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
@@ -38,18 +46,29 @@
             attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, and the GIS User Community'
         }).addTo(map);
 
-        const marker = L.marker([0,0]).addTo(map);
+        const issIcon = L.icon({
+            iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/d/d0/International_Space_Station.svg',
+            iconSize: [50, 30],
+            iconAnchor: [25, 15]
+        })
+
+        const marker = L.marker([0,0], { icon: issIcon }).addTo(map);
 
         async function getISS() {
             try {
                 const response = await fetch('https://api.wheretheiss.at/v1/satellites/25544');
                 const data = await response.json();
 
-                const { latitude, longitude } = data;
+                const { latitude, longitude, altitude, velocity } = data;
                 marker.setLatLng([latitude, longitude]);
                 map.setView([latitude, longitude], map.getZoom());
 
-                console.log('ISS Position: Lat. ${latitude}, Lon. ${longitude}');
+                document.getElementById('lat').textContent = latitude.toFixed(2);
+                document.getElementById('lon').textContent = longitude.toFixed(2);
+                document.getElementById('alt').textContent = altitude.toFixed(1) + ' km';
+                document.getElementById('vel').textContent = Math.round(velocity).toLocaleString() + ' km/h';
+
+                console.log(`ISS Position: Lat. ${latitude}, Lon. ${longitude}`);
             } catch (error) {
                 console.error('Error. Cannot fetch ISS location data: ', error);
             }
@@ -57,7 +76,7 @@
 
         getISS();
 
-        setInterval(getISS, 5000);
+        setInterval(getISS, 2500);
     </script>
 </body>
 </html>
