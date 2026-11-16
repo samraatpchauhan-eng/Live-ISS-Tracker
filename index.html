@@ -5,11 +5,14 @@
     <title>ISS Tracker</title>
     <!-- leaflet CSS file-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
         html, body {
             height: 100%;
             margin: 0;
-            background: #000d2b;
+            background: #000218;
             color: #f8fafc;
             font-family: Orbitron, sans-serif;
         }
@@ -25,16 +28,14 @@
         }
 
         #Telemetry {
-            margin-top: 20px;
+            margin-top: 5px;
             padding: 15px;
-            text-align: center;
+            text-align: Left;
         }
     </style>
 </head>
 <body>
     <h1>ISS Live Tracker</h1>
-    <!-- Map drawn here -->
-    <div id="map"></div>
     <!--- Telemetry Data here -->
     <div id="Telemetry">
         <h2> Telemetry Data </h2>
@@ -43,6 +44,8 @@
         <div>Altitude: <span id="alt" style="font-weight: bold;">--</span></div>
         <div>Velocity: <span id="vel" style="font-weight: bold;">--</span></div>
     </div>
+    <!-- Map drawn here -->
+    <div id="map"></div>
     <!-- Leaflet JS file -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
