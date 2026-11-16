@@ -82,6 +82,13 @@
         })
 
         const marker = L.marker([0,0], { icon: issIcon }).addTo(map);
+        const issPath = [];
+
+        const flightPath = L.polyline([], {
+            color: '#ff0000',
+            weight: 6,
+            opacity: 0.7
+        }).addTo(map);
 
         async function getISS() {
             try {
@@ -89,8 +96,12 @@
                 const data = await response.json();
 
                 const { latitude, longitude, altitude, velocity } = data;
+
                 marker.setLatLng([latitude, longitude]);
                 map.setView([latitude, longitude], map.getZoom());
+
+                issPath.push([latitude, longitude]);
+                flightPath.setLatLngs(issPath);
 
                 document.getElementById('lat').textContent = latitude.toFixed(2);
                 document.getElementById('lon').textContent = longitude.toFixed(2);
