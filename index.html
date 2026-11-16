@@ -68,12 +68,20 @@
     <div id="map"></div>
     <!-- Leaflet JS file -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!---Terminator plugin--->>
+    <script src="https://unpkg.com/@joergdietrich/leaflet.terminator@v1.0.0/L.terminator.js"></script>
     <script>
         const map = L.map('map').setView([0,0], 2);
         L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
             maxZoom: 19,
             attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, and the GIS User Community'
         }).addTo(map);
+
+        const terminator = L.terminator();
+        terminator.addTo(map);
+        setInterval(() => {
+            terminator.setTime();
+        }, 60000);
 
         const issIcon = L.icon({
             iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/d/d0/International_Space_Station.svg',
