@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>ISS Tracker</title>
-    <!-- Leaflet CSS file-->
+    <!-- leaflet CSS file-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
         html, body {
@@ -15,13 +15,19 @@
         }
 
         #map {
-            height: 80vh;
+            height: 90vh;
             width: 100%;
         }
 
         h1 {
             text-align: center;
             margin: 10px 0;
+        }
+
+        #Telemetry {
+            margin-top: 20px;
+            padding: 15px;
+            text-align: center;
         }
     </style>
 </head>
@@ -32,10 +38,10 @@
     <!--- Telemetry Data here -->
     <div id="Telemetry">
         <h2> Telemetry Data </h2>
-        <div>Lat: <span id="lat" style="font-weight: bold;">--</span></div>
-        <div>Lon: <span id="lon" style="font-weight: bold;">--</span></div>
-        <div>Alt: <span id="alt" style="font-weight: bold;">--</span></div>
-        <div>Vel: <span id="vel" style="font-weight: bold;">--</span></div>
+        <div>Latitude: <span id="lat" style="font-weight: bold;">--</span></div>
+        <div>Longitude: <span id="lon" style="font-weight: bold;">--</span></div>
+        <div>Altitude: <span id="alt" style="font-weight: bold;">--</span></div>
+        <div>Velocity: <span id="vel" style="font-weight: bold;">--</span></div>
     </div>
     <!-- Leaflet JS file -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
