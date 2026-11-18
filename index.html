@@ -63,6 +63,13 @@
                 <li>Loading Crew...</li>
             </ul>
         </div>
+
+        <!--- Next pass box--->
+        <div id="Passes" class="info-card">
+            <h2>Next Pass Over You</h2>
+            <div>Time:  <span id="pass-time" style="font-weight: bold;">Locating...</span></div>
+            <div>Time Duration of pass: <span id="pass-duration" style="font-weight: bold;">--</span></div>
+        </div>
     </div>
     <!-- Map drawn here -->
     <div id="map"></div>
@@ -143,8 +150,41 @@
             }
         }
 
+        function getNextPass() {
+            if ('geolocation' in navigator) {
+                navigator.geolocation.getCurrentPosition(async position => {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+
+                    try {
+                        const response = await fetch(`https://api.wheretheiss.at/v1/satellites/25544/passes?lat=${lat}&lon=${lon}&passes=1`);
+                        const data = await response.json();
+
+                        if(data && data.length > 0) {
+                            const nextPass = data[0];
+                            const passDate = new Date(nextPass.risetime * 1000).toLocaleTimeString();
+
+                            document.getElementById('pass-time').textContent = passDate;
+                            document.getElementById('pass-duration').textContent = Math.round(nextPass.duration / 60) + ' minutes';
+                        } else {
+                            document.getElementById('pass-time').textContent = 'No passes soon';
+                        }
+                    } catch (error) {
+                        console.error('Error fetching pass data: ', error);
+                        document.getElementById('pass-time').textContent = 'Error loading pass data';
+                    }
+                }, error => {
+                    console.warn('Geolocation permission denied: ', error.message);
+                    document.getElementById('pass-time').textContent = 'Location blocked';
+                });
+            } else {
+                document.getElementById('pass-time').textContent = 'Not Supported';
+            }
+        }
+
         getISS();
         getCrew();
+        getNextPass();
 
         setInterval(getISS, 2500);
     </script>
