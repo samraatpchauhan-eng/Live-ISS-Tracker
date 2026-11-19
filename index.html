@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
     <title>ISS Tracker</title>
+
     <!-- leaflet CSS file-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,6 +49,7 @@
 <body>
     <h1>Live ISS Tracker</h1>
     <div id="dashboard-panel">
+
         <!--- Telemetry Data here -->
         <div id="Telemetry" class="info-card">
             <h2> Telemetry Data </h2>
@@ -73,6 +76,7 @@
     </div>
     <!-- Map drawn here -->
     <div id="map"></div>
+
     <!-- Leaflet JS file -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <!---Terminator plugin--->>
@@ -188,5 +192,6 @@
 
         setInterval(getISS, 2500);
     </script>
+    
 </body>
 </html>
