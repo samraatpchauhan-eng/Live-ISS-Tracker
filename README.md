@@ -7,6 +7,7 @@ Live ISSTracker was made entirely from scratch, utilizing HTML, CSS, and some Ja
 
 # API's Used
 Core telemetry / Backend positioning logic: [wheretheiss.at](wheretheiss.at)
+    
     I mainly used whereistheiss.at for calling the location (lat and lon), altitude, and velocity of the iss every 2.5ms. This API also helped with computing the user's GPS location with the ISS's location to predict the next overhead pass based on the user
 ISS Crew API: []()
 
